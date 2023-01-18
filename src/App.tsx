@@ -5,7 +5,7 @@ function App() {
  
 
   return (
-    <div className="px-32">
+    <div className="px-16 md:px-32">
      <MainRoutes/>
     </div>
   )
