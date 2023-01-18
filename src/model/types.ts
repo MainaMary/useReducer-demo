@@ -6,6 +6,7 @@ export type ProductsProps = {
     delivery: boolean;
     image:string;
     date: Date;
+    cartQuantity: number
 }
 
 export type initialStateType = {
