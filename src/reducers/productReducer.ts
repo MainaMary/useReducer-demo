@@ -11,7 +11,7 @@ export const productReducer = (state: initialStateType, action: any) => {
             return { ...state, cart: cartItems }
         case ActionTypes.Delete:
             const filteredItems = state.cart.filter(item => item.id !== payload.id)
-            return { ...state, cart: state.cart.filter(item => item.id !== payload.id) }
+            return { ...state, cart: filteredItems }
         default:
             return state
     }
