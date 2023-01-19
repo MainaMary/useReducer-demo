@@ -1,15 +1,16 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 import { Link } from 'react-router-dom'
 import { useShoppingCart } from '../context/appContext'
 import { ProductsProps } from '../model/types'
 import { ActionTypes } from '../model/types'
 
+
 interface CartProps {
   cartItem: ProductsProps
 }
 export const CartCard = ({cartItem}:CartProps) =>{
-  const [count, setCount] =useState(1)
   const { name, image, price, delivery , id} = cartItem
+  const [count,setCount] = useState(1)
   const {dispatch} = useShoppingCart()
   const removeItem = (id:string) =>{
     dispatch({
@@ -17,6 +18,7 @@ export const CartCard = ({cartItem}:CartProps) =>{
       payload: id
     })
   }
+ 
   return <div className='shadow-lg rounded-md w-full'>
   <div className='grid grid-cols-1 md:grid-cols-5'>
     <img src={image} alt={name}/>
@@ -38,14 +40,19 @@ export const CartCard = ({cartItem}:CartProps) =>{
   
 }
 const Cart = () => {
-  const {state:{cart}, dispatch} = useShoppingCart()
+  const {state:{cart}} = useShoppingCart()
+  const [subTotal,setSubTotal] = useState(0)
+  useEffect(()=>{
+    const getTotal = cart.reduce((acc, curr)=>(acc + Number(curr.price)* curr.cartQuantity),0)
+    setSubTotal(getTotal)
+  },[cart])
   return (
     <div className='flex gap-3'>
       <div className='w-[80%]'>
         {!cart.length ? <p>Cart is empty. <Link to="/">Add items</Link></p>:cart.map(item =><CartCard key={item.id} cartItem={item}/>)}
       </div>
       <div className='w-[20%]'>
-        <p>Sub total</p>
+        <p>{subTotal}</p>
       </div>
     </div>
   )
