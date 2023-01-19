@@ -1,6 +1,7 @@
-import { createContext, useContext, useReducer } from "react";
+import React, { createContext, useContext, useReducer } from "react";
 import { productReducer } from "../reducers/productReducer";
-import { initialStateType } from "../model/types";
+import filtersReducer from "../reducers/filtersReducer";
+import { initialsFiltersType, initialStateType } from "../model/types";
 import {faker} from "@faker-js/faker"
  const Products = [...Array(12)].map(()=>({
     name:faker.commerce.productName(),
@@ -23,13 +24,23 @@ const initialState = {
     cart: []
 
 } 
+const initialFilters ={
+    searchParam: '',
+    fastDelivery: false,
+    price: null
+}
 
 const ShoppingCart = createContext<{
     state: initialStateType;
     dispatch: React.DispatchWithoutAction;
+    filters: initialsFiltersType;
+    dispatchFilters: React.DispatchWithoutAction;
+
   }>({
     state: initialState,
-    dispatch: () => null
+    dispatch: () => null,
+    filters: initialFilters,
+    dispatchFilters:() =>null
   })
 export const useShoppingCart = () =>{
     return useContext(ShoppingCart)
@@ -38,8 +49,9 @@ export const useShoppingCart = () =>{
 const CartProvider = ({children}:Props) =>{
      
     const [state, dispatch] = useReducer(productReducer, initialState)
+    const [filters, dispatchFilters] = useReducer(filtersReducer, initialFilters)
     console.log(Products,'products')
-    return <ShoppingCart.Provider value={{state, dispatch}}>{children}</ShoppingCart.Provider>
+    return <ShoppingCart.Provider value={{state, dispatch, filters, dispatchFilters}}>{children}</ShoppingCart.Provider>
 
 }
 export default CartProvider

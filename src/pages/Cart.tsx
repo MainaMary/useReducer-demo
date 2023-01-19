@@ -4,7 +4,6 @@ import { useShoppingCart } from '../context/appContext'
 import { ProductsProps } from '../model/types'
 import { ActionTypes } from '../model/types'
 
-
 interface CartProps {
   cartItem: ProductsProps
 }
@@ -18,7 +17,6 @@ export const CartCard = ({cartItem}:CartProps) =>{
       payload: id
     })
   }
- 
   return <div className='shadow-lg rounded-md w-full'>
   <div className='grid grid-cols-1 md:grid-cols-5'>
     <img src={image} alt={name}/>
