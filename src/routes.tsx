@@ -1,5 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./pages/Homepage";
+import Error from "./pages/Error";
 import Cart from "./pages/Cart";
 const routesList = [
     {path:'/',
@@ -7,6 +8,10 @@ const routesList = [
 },{
     path:'/cart',
     component: <Cart/>
+},
+{
+  path:"*",
+  component : <Error/>
 }
 ]
 const MainRoutes =()=>{
