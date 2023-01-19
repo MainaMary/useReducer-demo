@@ -7,7 +7,9 @@
         case ActionTypes.Delivery:
             return {...state, fastDelivery: !state.fastDelivery}
         case ActionTypes.Search:
-            return {...state, seearchQuery: payload}
+            console.log('STan is here');
+            
+            return {...state, searchParam: payload}
         case ActionTypes.Reset:
             return {
                 searchParam: '',

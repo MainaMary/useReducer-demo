@@ -14,7 +14,8 @@ const handleDelivery = () =>{
 }
 const handleSearch  =(e:any)=>{
     dispatchFilters({type:ActionTypes.Search, payload: e.target.value})
-    console.log(e.target.value)
+    console.log(e)
+   
 
 }
  console.log(fastDelivery, searchParam);
@@ -22,7 +23,7 @@ const handleSearch  =(e:any)=>{
 
   return (
     <div className='my-8 md:flex justify-between'>
-        <input type="text" placeholder='Search product...'  onChange={handleSearch} className="py-2 px-4 w-[40%] rounded-sm outline-none"/>
+        <input type="text" placeholder='Search product...'  onInput={handleSearch} className="py-2 px-4 w-full md:w-[40%] rounded-sm outline-none"/>
         <p className='flex h-auto items-center'>
         <span>Filter by:</span>
             {/** Value takes a string, for checkboxes checked is better since it takes a boolean*/}
