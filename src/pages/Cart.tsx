@@ -1,14 +1,16 @@
 import React,{useState, useEffect} from 'react'
-import { Link } from 'react-router-dom'
+
 import { useShoppingCart } from '../context/appContext'
 import { ProductsProps } from '../model/types'
 import { ActionTypes } from '../model/types'
+import Empty from './Empty'
 
 interface CartProps {
   cartItem: ProductsProps
 }
 export const CartCard = ({cartItem}:CartProps) =>{
   const { name, image, price, delivery , id} = cartItem
+  console.log(cartItem)
   const [count,setCount] = useState(1)
   const {dispatch} = useShoppingCart()
   const removeItem = (id:string) =>{
@@ -17,21 +19,26 @@ export const CartCard = ({cartItem}:CartProps) =>{
       payload: id
     })
   }
-  return <div className='shadow-lg rounded-md w-full'>
-  <div className='grid grid-cols-1 md:grid-cols-5'>
-    <img src={image} alt={name}/>
-    <p>{name}</p>
-    <p>{price}</p>
-    <p>{delivery}</p>
-    <div className='grid grid-cols-3 '>
+  //grid grid-cols-1 gap-8 md:grid-cols-5
+
+  return <div className='shadow-lg rounded-md w-full bg-white  px-8 py-4   mb-8'>
+  <div className='grid grid-cols-1 gap-8 md:grid-cols-5 h-auto items-center text-center '>
+    <div >
+    <img src={image} alt={name} className="w-full"/>
+    </div>
+
+    <p >{name}</p>
+    <p>{`${price}`}</p>
+    <p >{delivery ? 'Fast delivery' :'3 days delivery'}</p>
+    <div className='grid grid-cols-3  '>
       <p>+</p>
       <p>{count}</p>
       <p>-</p>
     </div>
-    <></>
+    
 
   </div>
-  <div>
+  <div className='mt-4 mb-2'>
     <button onClick={() => removeItem(id)}>Remove from cart</button>
   </div>
   </div>
@@ -45,14 +52,20 @@ const Cart = () => {
     setSubTotal(getTotal)
   },[cart])
   return (
-    <div className='flex gap-3'>
-      <div className='w-[80%]'>
-        {!cart.length ? <p>Cart is empty. <Link to="/">Add items</Link></p>:cart.map(item =><CartCard key={item.id} cartItem={item}/>)}
+    <>
+    {!cart.length ? <Empty title="Cart is empty.."/>:<div className='md:flex gap-16 mt-8  '>
+      <div className=' w-full md:w-[80%] ' >
+        {cart.length && cart.map(item =><CartCard key={item.id} cartItem={item}/>)}
       </div>
-      <div className='w-[20%]'>
-        <p>{subTotal}</p>
+      <div className='w-full md:w-[20%] h-52 bg-primary-color text-white shadow-lg p-4'>
+        <h3>Sub total</h3>
+        <p>{`$${subTotal}.00`}</p>
+        <button className='bg-white w-full mt-16 text-primary-color'>Checkout</button>
       </div>
-    </div>
+    </div>}
+    
+    </>
+    
   )
 }
 

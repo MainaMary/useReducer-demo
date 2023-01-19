@@ -22,16 +22,16 @@ const handleSearch  =(e:any)=>{
  
    
   return (
-    <div className='my-4 md:flex justify-between'>
-        <input type="text" placeholder='Search by name...'  onChange={handleSearch}/>
-        <div>
+    <div className='my-8 md:flex justify-between'>
+        <input type="text" placeholder='Search product...'  onChange={handleSearch} className="py-2 px-4 w-[40%] rounded-sm outline-none"/>
+        <p className='flex h-auto items-center'>
         <span>Filter by:</span>
         <input type="checkbox" value={fastDelivery} onChange={handleDelivery} className="mx-4"/>
-        <label>Fast delivery</label>
+        <p>Fast delivery</p>
         {/* <select >
             { optionList.map(item=><option key={item.type}  onChange={handleDelivery}>{item.label}</option>)}
         </select> */}
-        </div>
+        </p>
     </div>
   )
 }

@@ -27,11 +27,11 @@ const ProductCard = ({ product }: SingleProduct) => {
 
     },[cart, id])
     return (
-        <div className="shadow-lg rounded-sm px-2 md:px-8 py-4">
-            <img src={image} alt={name} />
+        <div className="shadow-lg rounded-sm px-2 bg-white text-center md:text-start md:px-8 py-4">
+            <img src={image} alt={name} className="w-full rounded-sm mb-2"/>
             <p>{name}</p>
-            <p>{price.split('.')[0]}</p>
-            <div>{delivery ? <h2>Fast delivery</h2> : <h2>3 days delivery</h2>}</div>
+            <p className='my-2'>{`$${price.split('.')[0]}.00`}</p>
+            <div> <h3>{delivery ? 'Fast delivery':'3 days delivery'}</h3></div>
            
             <div>
                 { 

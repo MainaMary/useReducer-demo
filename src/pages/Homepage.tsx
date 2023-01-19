@@ -7,7 +7,7 @@ const Homepage = () => {
   const { state: { products }, filters:{searchParam, fastDelivery} } = useShoppingCart()
   let productList = products
   useEffect(()=>{
-    
+
   },[])
   const updatedProducts =()=>{
    
@@ -24,7 +24,7 @@ const Homepage = () => {
   return (
     <>
     <Filters/>
-      <div className='grid grid-cols-1 md:grid-cols-3 gap-4 mt-3 '>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-16 mt-3 '>
         {updatedProducts().map(product => <ProductCard key={product.id} {...product} product={product} />)}
       </div>
     </>
