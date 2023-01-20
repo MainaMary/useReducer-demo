@@ -1,22 +1,22 @@
  import { ActionTypes, initialsFiltersType } from "../model/types"
 
- // the action has a payload and a type, You can make the action any if you aren't sure about the type of it's children
- const filtersReducer = (state:initialsFiltersType, action: any) =>{
+
+ interface ActionProps {
+    payload : string ,
+    type:ActionTypes
+ }
+ const filtersReducer = (state:initialsFiltersType, action:ActionProps) =>{
     const {payload, type} = action
     switch(type){
         case ActionTypes.Delivery:
             return {...state, fastDelivery: !state.fastDelivery}
         case ActionTypes.Search:
-            console.log('STan is here');
             
             return {...state, searchParam: payload}
         case ActionTypes.Reset:
             return {
                 searchParam: '',
                 fastDelivery: false,
-
-                // the price should be 0
-                price: 0
             }
         default:
             return state

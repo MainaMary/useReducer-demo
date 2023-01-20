@@ -1,7 +1,10 @@
 import { ProductsProps, ActionTypes, initialStateType } from "../model/types"
 
-
-export const productReducer = (state: initialStateType, action: any) => {
+interface ActionProps {
+    type :ActionTypes,
+    payload : ProductsProps 
+}
+export const productReducer = (state: initialStateType, action: ActionProps) => {
     const { type, payload } = action
 
     switch (type) {
@@ -10,9 +13,11 @@ export const productReducer = (state: initialStateType, action: any) => {
             const cartItems = [...state.cart, { cartQuantity: 1, ...payload }]
             return { ...state, cart: cartItems }
         case ActionTypes.Delete:
-            const filteredItems = state.cart.filter(item => item.id !== payload.id)
+           
+            const filteredItems = state.cart.filter(item =>item.id !== payload.id)
+           
             return { ...state, cart: filteredItems }
         default:
-            return state
+            throw new Error(`Unknown action type: ${type}`)
     }
 }
