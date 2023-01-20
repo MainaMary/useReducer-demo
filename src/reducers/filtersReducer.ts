@@ -19,7 +19,7 @@
                 fastDelivery: false,
             }
         default:
-            return state
+            throw new Error(`Unknown action type ${type}`)
     }
 
 }
