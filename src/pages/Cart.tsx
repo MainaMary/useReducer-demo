@@ -9,14 +9,14 @@ interface CartProps {
   cartItem: ProductsProps
 }
 export const CartCard = ({cartItem}:CartProps) =>{
-  const { name, image, price, delivery , id} = cartItem
+  const { name, image, price, delivery } = cartItem
   console.log(cartItem)
   const [count,setCount] = useState(1)
   const {dispatch} = useShoppingCart()
-  const removeItem = (id:string) =>{
+  const removeItem = (cartItem:ProductsProps) =>{
     dispatch({
       type: ActionTypes.Delete,
-      payload: id
+      payload: cartItem
     })
   }
   //grid grid-cols-1 gap-8 md:grid-cols-5
@@ -31,15 +31,15 @@ export const CartCard = ({cartItem}:CartProps) =>{
     <p>{`${price}`}</p>
     <p >{delivery ? 'Fast delivery' :'3 days delivery'}</p>
     <div className='grid grid-cols-3  '>
-      <p>+</p>
+      
       <p>{count}</p>
-      <p>-</p>
+      
     </div>
     
 
   </div>
   <div className='mt-4 mb-2'>
-    <button onClick={() => removeItem(id)}>Remove from cart</button>
+    <button onClick={() => removeItem(cartItem)}>Remove from cart</button>
   </div>
   </div>
   
@@ -48,7 +48,7 @@ const Cart = () => {
   const {state:{cart}} = useShoppingCart()
   const [subTotal,setSubTotal] = useState(0)
   useEffect(()=>{
-    const getTotal = cart.reduce((acc, curr)=>(acc + Number(curr.price)* curr.cartQuantity),0)
+    const getTotal = cart.reduce((acc, curr)=>(acc + Number(curr.price)),0)
     setSubTotal(getTotal)
   },[cart])
   return (

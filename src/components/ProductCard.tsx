@@ -13,9 +13,9 @@ const ProductCard = ({ product }: SingleProduct) => {
     const handleAddToCart = (product: ProductsProps) => {
         dispatch({ type: ActionTypes.Add, payload: product })
     }
-    const handleRemoveFromCart = (productId:string)=>{
-        console.log(productId)
-        dispatch({ type: ActionTypes.Delete, payload: productId })
+    const handleRemoveFromCart = (product:ProductsProps)=>{
+        console.log(product,'productId')
+        dispatch({ type: ActionTypes.Delete, payload: product})
     }
     useEffect(()=>{
         const productIsInCart = cart.find(product =>product.id === id)
@@ -36,7 +36,7 @@ const ProductCard = ({ product }: SingleProduct) => {
             <div>
                 { 
                 isInCart
-                ? <button onClick={() =>handleRemoveFromCart(product.id)}>Remove from cart</button> :
+                ? <button onClick={() =>handleRemoveFromCart(product)}>Remove from cart</button> :
                 <button onClick={() => handleAddToCart(product)}>Add to cart</button>
                 
                 }       
