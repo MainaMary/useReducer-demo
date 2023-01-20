@@ -6,7 +6,8 @@ export type ProductsProps = {
     delivery: boolean;
     image:string;
     date: Date;
-    cartQuantity: number
+    
+   
 }
 
 export type initialStateType = {
@@ -16,7 +17,7 @@ export type initialStateType = {
 export type initialsFiltersType = {
     searchParam: string,
     fastDelivery: boolean,
-    price: number
+   
 }
 export enum ActionTypes {
     Add = 'ADD_PRODUCT',
