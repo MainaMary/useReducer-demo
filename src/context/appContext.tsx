@@ -33,8 +33,8 @@ const contextInitialState = {
     filters: initialFilters,
     dispatchFilters:() =>null
 }
- // Since you will be passing an action to dispatch, you need to use the Dispatch type
-    // I passed in the any type, but you can be more specific
+ // passing an action to dispatch, you need to use the Dispatch type
+   
 const ShoppingCart = createContext<{
     state: initialStateType;
     dispatch: React.Dispatch<any>;
